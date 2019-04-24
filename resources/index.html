@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>計算機</title>
+        <meta charset="UTF-8">
+        <link href="css/pc.css" rel ="stylesheet" type="text/css">
+        <link href="css/sp.css" media="screen and (max-width:768px)"
+              rel ="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+        <script src="js/connection.js"></script>
+
+        <div id="baseitem">
+            <div id="mainitem">
+                <h2 style="margin:0;top:20px">単語計算機</h2>
+                <p>単語間の関連性を計算するシステム</p>
+                <form id="my-form">
+                    <p>+<input type="radio" name="sw1" value="pos">   -<input type="radio" name="sw1" value="neg"> 単語<input type="text" id="word" /></p>
+                    <p>+<input type="radio" name="sw2" value="pos">   -<input type="radio" name="sw2" value="neg"> 単語<input type="text" id="word" /></p>
+                    <p>+<input type="radio" name="sw3" value="pos">   -<input type="radio" name="sw3" value="neg"> 単語<input type="text" id="word" /></p>
+                    <p>+<input type="radio" name="sw4" value="pos">   -<input type="radio" name="sw4" value="neg"> 単語<input type="text" id="word" /></p>
+                    <p>+<input type="radio" name="sw5" value="pos">   -<input type="radio" name="sw5" value="neg"> 単語<input type="text" id="word" /></p>
+                    <input type="submit" id="submit_button" >
+                </form>
+                <div id="result">
+                    <h2>NO DATA</h2>
+                    <!-- control by connection.js -->
+                </div>
+                <canvas id="result_graph" style="display: none"></canvas>
+                <hr/>
+                <p>copyright CLB all rights reserved.</p>
+                <br/>
+            </div>
+        </div>
+
+
+    </body>
+</html>
