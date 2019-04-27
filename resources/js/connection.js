@@ -6,53 +6,27 @@
 
 var graph = undefined;
 
-function postImg(){
-    var raw_sendData = document.getElementById('canvassample');
-    
-    if(!raw_sendData){
-        console.log("get canvas Data FAILD");
-        $("#result").html( "<h2>" + "ERROR. send failed</h2>");
-        return -1;
+function postword(){
+    var formData = document.forms.input_from;
+    var sendData = [];
+
+    for (i = 1; i < 6; i++){
+        data = {};
+        data["sw"] = formData["sw" + i].value
+        data["text"] = formData["word" + i].value
+        sendData.push(data)
     }
     
-    //ボタンの無効化
-    $("#canvas_ctrl_clear").css('background-color','silver');
-    $("#canvas_ctrl_start").css('background-color','silver');
-    $("#canvas_ctrl_clear").prop("disabled", true);
-    $("#canvas_ctrl_start").prop("disabled", true);
-    
+    console.log(sendData)
+
     $("#result").html( "<h2>sending...</h2>");
-    var sendData = {};
-    sendData["img"] = raw_sendData.toDataURL();
     
-    $.post("/image_recognition",sendData)
+    $.post("/api/calc_words",sendData)
             .done(
                 function(data){
-                var max = Math.max.apply(null, data);
-                var highestIndx = data.indexOf(max);
-
-                $("#result").html( "<h2>" + "result:" + highestIndx + "</h2>");
-
-                drawGraph(data);
-                $("#result_graph").show("fast");
-
-                //ボタンの有効化
-                $("#canvas_ctrl_clear").css('background-color','#ff0033');
-                $("#canvas_ctrl_start").css('background-color','#3399ff');
-                $("#canvas_ctrl_clear").prop("disabled", false);
-                $("#canvas_ctrl_start").prop("disabled", false);
+                $("#result").html( "<h2>result</h2>" + data);
             })
             .fail(function(jqXHR, textStatus, errorThrown){
                 $("#result").html( "<h2>ERROR:Link failed. please retry.</h2>");
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
-                //ボタンの有効化
-                $("#canvas_ctrl_clear").css('background-color','#ff0033');
-                $("#canvas_ctrl_start").css('background-color','#3399ff');
-                $("#canvas_ctrl_clear").prop("disabled", false);
-                $("#canvas_ctrl_start").prop("disabled", false);
             });
-    
-    
 }
