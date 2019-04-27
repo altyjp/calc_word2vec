@@ -6,7 +6,7 @@
 
 var graph = undefined;
 
-function postword(){
+function calcword(){
     var formData = document.forms.input_from;
     var sendData = [];
 
