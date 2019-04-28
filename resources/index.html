@@ -22,13 +22,13 @@ and open the template in the editor.
             <div id="mainitem">
                 <h2 style="margin:0;top:20px">単語計算機</h2>
                 <p>単語間の関連性を計算するシステム</p>
-                <form name="input_from">
+                <form name="input_from" onsubmit="calcword(); return false;">
                     <p>+<input type="radio" name="sw1" value="pos">   -<input type="radio" name="sw1" value="neg"> 単語<input type="text" name="word1" /></p>
                     <p>+<input type="radio" name="sw2" value="pos">   -<input type="radio" name="sw2" value="neg"> 単語<input type="text" name="word2" /></p>
                     <p>+<input type="radio" name="sw3" value="pos">   -<input type="radio" name="sw3" value="neg"> 単語<input type="text" name="word3" /></p>
                     <p>+<input type="radio" name="sw4" value="pos">   -<input type="radio" name="sw4" value="neg"> 単語<input type="text" name="word4" /></p>
                     <p>+<input type="radio" name="sw5" value="pos">   -<input type="radio" name="sw5" value="neg"> 単語<input type="text" name="word5" /></p>
-                    <input type="submit" id="submit_button" onclick="calcword()" >
+                    <input type="submit" name="submit" id="submit_button">
                 </form>
                 <div id="result">
                     <h2>NO DATA</h2>

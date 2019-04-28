@@ -2,7 +2,7 @@
 import os
 import gensim
 
-from flask import Flask
+from flask import Flask, request
 
 # flask
 # 相対パスで指定
@@ -11,13 +11,9 @@ model = gensim.models.KeyedVectors.load_word2vec_format('entity_vector.model.bin
 
 @app.route('/api/calc_words',methods=["POST"])
 def calc_words():
-    #[{sw: "pos", text: "TEST"},{sw: "pos", text: "TEST"},{sw: "pos", text: "TEST"}....]
-    #result = model.most_similar(positive=positive_ary,negative=negative_ary)
 
-    post_data = [{'sw': "pos", 'text': "TEST"},
-            {'sw': "pos", 'text': "TEST"},
-            {'sw': "pos", 'text': "TEST"}]
-
+    post_data = request.get_json()
+    result = None
     positive_ary = []
     negative_ary = []
 
@@ -27,9 +23,13 @@ def calc_words():
         elif data["sw"] == "neg":
             negative_ary.append(data["text"])
     
-    result = model.most_similar(positive=positive_ary,negative=negative_ary)
+    try:
+        result = model.most_similar(positive=positive_ary,negative=negative_ary)
+    except KeyError as error:
+        result = error
+        print(error)
 
-    return result
+    return str(result)
 
 # main
 if __name__ == "__main__":
